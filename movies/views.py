@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import ListView, DetailView
 from .models import Movie
 
 
@@ -7,9 +7,18 @@ def main_test(request):
     return render(request, template_name='movies/main.html')
 
 
-class HomePageView(View):
-    "Список фильмов"
+class HomePageView(ListView):
+    """Список фильмов"""
 
-    def get(self, request):
-        movies = Movie.objects.all()
-        return render(request=request, template_name='movies/movies.html', context={'movie_list': movies})
+    model = Movie
+    queryset = Movie.objects.filter(draft=False)
+    template_name = "movies/movies.html"
+
+
+class MovieDetailView(DetailView):
+    """Подробности о фильме"""
+
+    model = Movie
+    slug_field = "url"
+    template_name = "movies/movie_detail.html"
+

@@ -1,8 +1,9 @@
 from django.db import models
 from datetime import date
 
-
 # Create your models here.
+from django.urls import reverse
+
 
 class Category(models.Model):
     title = models.CharField(verbose_name="Название категории", max_length=40)
@@ -37,6 +38,9 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    def get_absolute_url(self):
+        return reverse("movie_detail", kwargs={"slug": self.url})
 
     class Meta:
         verbose_name = "Фильм"
