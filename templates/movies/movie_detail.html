@@ -172,9 +172,8 @@
                             <label for="contactcomment" class="editContent">
                                 Ваш комментарий *
                             </label>
-                            <textarea class="form-control border" rows="5" name="text"
-                                      id="contactcomment" required="">
-                            </textarea>
+                            <textarea class="form-control border" name="text"
+                                      id="contactcomment" required=""></textarea>
                         </div>
                         <div class="d-sm-flex">
                             <div class="col-sm-6 form-group p-0 editContent">
@@ -200,36 +199,37 @@
                 </div>
                 <!--  //contact form grid ends here -->
             </div>
-            <div class="media py-5">
-                <img src="images/te2.jpg" class="mr-3 img-fluid" alt="image"
-                     style="outline: none; cursor: inherit;">
-                <div class="media-body mt-4">
-                    <h5 class="mt-0 editContent"
-                        style="outline: none; cursor: inherit;">Daniel Doe</h5>
-                    <p class="mt-2 editContent" style="outline: none; cursor: inherit;">
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                        scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                        vulputate at, tempus viverra turpis.
-                    </p>
-                    <div class="media mt-5 editContent"
+            {% for review in movie.review_set.all %}
+                <div class="media py-5">
+                    <img src="images/te2.jpg" class="mr-3 img-fluid" alt="image"
                          style="outline: none; cursor: inherit;">
-                        <a class="pr-3" href="#">
-                            <img src="images/te1.jpg" class="img-fluid "
-                                 alt="image" style="outline: none; cursor: inherit;">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="mt-0 editContent"
-                                style="outline: none; cursor: inherit;">Leia Organa</h5>
-                            <p class="mt-2 editContent"
-                               style="outline: none; cursor: inherit;"> Cras sit amet
-                                nibh libero, in gravida nulla. Nulla vel metus
-                                scelerisque ante sollicitudin. Cras purus odio,
-                                vestibulum in vulputate at, tempus viverra turpis. Fusce
-                                condimentum nunc ac nisi vulputate fringilla..</p>
-                        </div>
+                    <div class="media-body mt-4">
+                        <h5 class="mt-0 editContent">
+                            {{ review.name }}
+                        </h5>
+                        <p class="mt-2 editContent">
+                            {{ review.text }}
+                        </p>
+                        {#                    <div class="media mt-5 editContent"#}
+                        {#                         style="outline: none; cursor: inherit;">#}
+                        {#                        <a class="pr-3" href="#">#}
+                        {#                            <img src="images/te1.jpg" class="img-fluid "#}
+                        {#                                 alt="image" style="outline: none; cursor: inherit;">#}
+                        {#                        </a>#}
+                        {#                        <div class="media-body">#}
+                        {#                            <h5 class="mt-0 editContent"#}
+                        {#                                style="outline: none; cursor: inherit;">Leia Organa</h5>#}
+                        {#                            <p class="mt-2 editContent"#}
+                        {#                               style="outline: none; cursor: inherit;"> Cras sit amet#}
+                        {#                                nibh libero, in gravida nulla. Nulla vel metus#}
+                        {#                                scelerisque ante sollicitudin. Cras purus odio,#}
+                        {#                                vestibulum in vulputate at, tempus viverra turpis. Fusce#}
+                        {#                                condimentum nunc ac nisi vulputate fringilla..</p>#}
+                        {#                        </div>#}
+                        {#                    </div>#}
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
