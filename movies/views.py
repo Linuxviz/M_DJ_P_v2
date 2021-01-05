@@ -1,10 +1,6 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, View
 from .models import Movie
-
-
-def main_test(request):
-    return render(request, template_name='movies/main.html')
 
 
 class HomePageView(ListView):
@@ -22,3 +18,10 @@ class MovieDetailView(DetailView):
     slug_field = "url"
     template_name = "movies/movie_detail.html"
 
+
+class AddReviewView(View):
+    """Отзывы"""
+
+    def post(self, request, pk):
+        print(request.POST)
+        return redirect('/')
