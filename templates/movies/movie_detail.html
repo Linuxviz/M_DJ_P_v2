@@ -1,4 +1,5 @@
 {% extends "movies/base.html" %}
+{% load static %}
 {% block title %}
     {{ movie.title }}
 {% endblock title %}
@@ -201,7 +202,7 @@
         </div>
         {% for review in movie.review_set.all %}
             <div class="media py-5">
-                <img src="images/te2.jpg" class="mr-3 img-fluid" alt="image"
+                <img src="{% static 'images/te2.jpg' %}" class="mr-3 img-fluid" alt="image"
                      style="outline: none; cursor: inherit;">
                 <div class="media-body mt-4">
                     <h5 class="mt-0 editContent">
