@@ -61,6 +61,7 @@ class GenreAdmin(admin.ModelAdmin):
 
 class ActorAdmin(admin.ModelAdmin):
     list_display = ("name", "description", "age", "get_image")
+    readonly_fields = ("get_image",)
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.image.url} width="50" height="60">')
@@ -73,7 +74,13 @@ class RatingAdmin(admin.ModelAdmin):
 
 
 class MovieShotsAdmin(admin.ModelAdmin):
-    list_display = ("title", "id_movie")
+    list_display = ("title", "id_movie", "get_image")
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="50" height="60">')
+
+    get_image.short_description = "Изображение"
 
 
 admin.site.register(Actor, ActorAdmin)
