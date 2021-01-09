@@ -3,6 +3,9 @@ from django.utils.safestring import mark_safe
 
 from .models import Actor, Category, Rating, RatingStar, Movie, MovieShots, Genre, Review
 
+admin.site.site_title = "Django movie"
+admin.site.site_header = "Django movie"
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "url", "title")
@@ -16,15 +19,26 @@ class ReviewInline(admin.TabularInline):
     extra = 1
 
 
+class MovieShotsInLine(admin.TabularInline):
+    model = MovieShots
+    extra = 1
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="120" height="120">')
+
+    get_image.short_description = "Изображение"
+
+
 class MovieAdmin(admin.ModelAdmin):
     list_display = ("title", "category", "url", "draft")
     list_filter = ("category", "year")
     search_fields = ("title", "category__title")
-    inlines = [ReviewInline]
+    inlines = [MovieShotsInLine, ReviewInline]
     save_on_top = True
     save_as = True
+    readonly_fields = ("get_image",)
     list_editable = ("draft",)
-    # fields = (("actors", "directors", "genre"),)
     fieldsets = (
         (
             None, {
@@ -32,7 +46,7 @@ class MovieAdmin(admin.ModelAdmin):
             }
         ),
         (None, {
-            "fields": ("description", "poster")
+            "fields": ("description", ("get_image", "poster"))
         }),
         (None, {
             "fields": (("year", "world_premiere", "country"),)
@@ -48,6 +62,11 @@ class MovieAdmin(admin.ModelAdmin):
             "fields": (("url", "draft"),)
         }),
     )
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.poster.url} width="500" height="500">')
+
+    get_image.short_description = "Gjcnth"
 
 
 class ReviewAdmin(admin.ModelAdmin):
