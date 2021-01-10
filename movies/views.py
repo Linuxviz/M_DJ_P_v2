@@ -11,6 +11,11 @@ class HomePageView(ListView):
     queryset = Movie.objects.filter(draft=False)
     template_name = "movies/movies.html"
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
 
 class MovieDetailView(DetailView):
     """Подробности о фильме"""
