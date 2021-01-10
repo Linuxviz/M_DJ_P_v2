@@ -146,16 +146,16 @@
                     <img src="{{ img.image.url }}" class="img-movie-shots" alt="{{ img.description }}">
                 {% endfor %}
             </p>
-            <p class="editContent" style="outline: none; cursor: inherit;">{{ movie.description }}</p>
-            <p class="mt-3 italic-blue editContent"
-               style="outline: none; cursor: inherit;">
-                <iframe width="560" height="315"
-                        src="#"
-                        frameborder="0" allow="accelerometer; autoplay;
-                                    encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </p>
+            <p class="editContent">{{ movie.description|safe }}</p>
+{#            <p class="mt-3 italic-blue editContent"#}
+{#               style="outline: none; cursor: inherit;">#}
+{#                <iframe width="560" height="315"#}
+{#                        src="#"#}
+{#                        frameborder="0" allow="accelerometer; autoplay;#}
+{#                                    encrypted-media; gyroscope; picture-in-picture"#}
+{#                        allowfullscreen>#}
+{#                </iframe>#}
+{#            </p>#}
         </div>
         <hr>
         <div class="row">
