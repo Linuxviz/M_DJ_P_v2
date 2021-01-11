@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View
-from .models import Movie
+from .models import Movie, Category
 from .forms import ReviewForm
 
 
@@ -11,7 +11,7 @@ class HomePageView(ListView):
     queryset = Movie.objects.filter(draft=False)
     template_name = "movies/movies.html"
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['categories'] = Category.objects.all()
         return context
