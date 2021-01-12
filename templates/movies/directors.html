@@ -1,0 +1,70 @@
+{% extends "movies/base.html" %}
+{% load static %}
+{% block title %}
+    {{ actor.title }}
+{% endblock title %}
+{% block container %}
+    <div class="container py-md-3">
+{% endblock %}
+
+{% block sidebar %}
+    <div class="side-bar col-lg-4">
+{% endblock sidebar %}
+
+{% block movie %}
+    <div class="left-ads-display col-lg-8">
+        <div class="row">
+            <div class="desc1-left col-md-6">
+                <img src="{{ actor.image.url }}" class="img-fluid" alt="">
+            </div>
+            <div class="desc1-right col-md-6 pl-lg-4">
+                <h3 class="editContent" style="outline: none; cursor: inherit;">
+                    {{ actor.name }}
+                </h3>
+                <ul>
+                    <li style="list-style: none">
+                                    <span>
+                                        <b>Имя:</b>
+                                        {{ actor.name }}
+                                    </span>
+                    </li>
+                    <li style="list-style: none">
+                                    <span>
+                                        <b>Возраст:</b>
+                                        {{ actor.age }}
+                                    </span>
+                    </li>
+                    <li style="list-style: none">
+                                    <span>
+                                        <b>Фильмы:</b>
+                                        {% for movie in actor.movie_director.all %}
+                                            {{ movie.title }};
+                                        {% endfor %}
+                                    </span>
+                    </li>
+                    <li style="list-style: none">
+                                    <span>
+                                        <b>Роли:</b>
+                                        {% for actor in actor.movie_actors.all %}
+                                            {{ actor.title }};
+                                        {% endfor %}
+                                    </span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row sub-para-w3layouts mt-5">
+
+            <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
+                О режиссере {{ actor.name }}</h3>
+            <p>
+                {% for img in movie.movieshots_set.all %}
+                    <img src="{{ img.image.url }}" class="img-movie-shots" alt="{{ img.description }}">
+                {% endfor %}
+            </p>
+            <p class="editContent">{{ actor.description|safe }}</p>
+        </div>
+    </div>
+    </div>
+{% endblock %}

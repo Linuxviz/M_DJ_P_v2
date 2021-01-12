@@ -23,7 +23,7 @@
                     <input type="checkbox" id="drop-2">
                     <ul>
                     {% get_categories as categories %}
-                        {% for category in categories   %}
+                        {% for category in categories %}
                             <li><a href="/">{{ category.title }}</a></li>
                         {% endfor %}
                     </ul>

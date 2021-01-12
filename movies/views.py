@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View
-from .models import Movie, Category
+from .models import Movie, Category, Actor
 from .forms import ReviewForm
 
 
@@ -28,6 +28,14 @@ class MovieDetailView(DetailView):
     #     context = super().get_context_data(*args, **kwargs)
     #     context['categories'] = Category.objects.all()
     #     return context
+
+
+class DirectorDetailView(DetailView):
+    """Подробности о фильме"""
+
+    model = Actor
+    slug_field = "name"
+    template_name = "movies/directors.html"
 
 
 class AddReviewView(View):
