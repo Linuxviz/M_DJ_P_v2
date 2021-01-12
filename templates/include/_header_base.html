@@ -1,4 +1,5 @@
-<div class="main-banner bg bg1" id="home"
+{% load template_tags %}
+<div class="main-banner bg bg1" id="home">
 <!-- header -->
 <header class="header">
     <div class="container-fluid px-lg-5">
@@ -21,7 +22,8 @@
                     <a href="#">Категории <span class="fa fa-angle-down" aria-hidden="true"></span></a>
                     <input type="checkbox" id="drop-2">
                     <ul>
-                        {% for category in categories %}
+                    {% get_categories as categories %}
+                        {% for category in categories   %}
                             <li><a href="/">{{ category.title }}</a></li>
                         {% endfor %}
                     </ul>
