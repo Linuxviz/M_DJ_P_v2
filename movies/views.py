@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View
 from .models import Movie, Category, Actor, Genre
-from .forms import ReviewForm
+from .forms import ReviewForm, RatingForm
 
 
 class GenreYear:
@@ -32,6 +32,11 @@ class MovieDetailView(DetailView, GenreYear):
     model = Movie
     slug_field = "url"
     template_name = "movies/movie_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["star_form"] = RatingForm()
+        return context
 
     # def get_context_data(self, *args, **kwargs):
     #     context = super().get_context_data(*args, **kwargs)
