@@ -34,23 +34,26 @@
                                         {{ actor.age }}
                                     </span>
                     </li>
-                    <li style="list-style: none">
+                    {% if actor.movie_director.all %}
+                        <li style="list-style: none">
                                     <span>
-                                        <b>Фильмы:</b>
+                                        <b>Режессировала фильмы:</b>
                                         {% for movie in actor.movie_director.all %}
                                             {{ movie.title }};
                                         {% endfor %}
                                     </span>
-                    </li>
-                    <li style="list-style: none">
+                        </li>
+                    {% endif %}
+                    {% if actor.movie_actors.all %}
+                        <li style="list-style: none">
                                     <span>
-                                        <b>Роли:</b>
+                                        <b>Роли в фильмах:</b>
                                         {% for actor in actor.movie_actors.all %}
                                             {{ actor.title }};
                                         {% endfor %}
                                     </span>
-                    </li>
-
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
