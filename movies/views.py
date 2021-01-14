@@ -1,7 +1,8 @@
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View
-from .models import Movie, Category, Actor, Genre
+from .models import Movie, Category, Actor, Genre, Rating
 from .forms import ReviewForm, RatingForm
 
 
@@ -76,3 +77,27 @@ class FilterMoviesView(GenreYear, ListView):
             Q(year__in=self.request.GET.getlist("year"))
         ).distinct()
         return queryset
+
+
+class AddStarRating(View):
+    """Добавление рейтинга к фильму"""
+
+    def get_client_ip(self, request):
+        x_forwarder_for = request.META.get('HTTP_X_FORWARDER_FOR')
+        if x_forwarder_for:
+            ip = x_forwarder_for.split(',')[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+        return ip
+
+    def post(self, request):
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            Rating.objects.update_or_create(
+                ip=self.get_client_ip(request),
+                movie_id=int(request.POST.get("movie")),
+                defaults={'star_id': int(request.POST.get("star"))}
+            )
+            return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=400)
